@@ -1,7 +1,18 @@
-<p>
-  albums-list works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Top 100 albums</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="!albums.isFetching">
+      <pre>
+        {{ albums | json }}
+      </pre>
+    </ng-container>
 
-<pre>
-  {{ albums | json }}
-</pre>
+    <div
+      *ngIf="albums.isFetching"
+      class="albums-list__loader-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  </mat-card-content>
+</mat-card>

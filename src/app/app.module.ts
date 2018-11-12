@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CoreModule } from './core/core.module';
     EffectsModule.forRoot([
       AlbumsEffects,
     ]),
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
