@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumsActions } from '@core/actions';
+import { AlbumsFeed } from '@core/models/albums.models';
+import { CommonList } from '@core/models/utils';
 import * as fromRoot from '@core/reducers';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -11,7 +13,7 @@ import { Observable, Subject } from 'rxjs';
 export class AlbumsListPageComponent implements OnInit {
   ngUnsubscribe: Subject<any> = new Subject();
 
-  albums$: Observable<any>;
+  albums$: Observable<CommonList<AlbumsFeed>>;
 
   constructor(
     private store: Store<fromRoot.State>,

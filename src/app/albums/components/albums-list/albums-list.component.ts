@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonList } from '@core/models/utils';
+import { AlbumsFeed } from '@core/models/albums.models';
 
 @Component({
   selector: 'app-albums-list',
@@ -6,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./albums-list.component.scss']
 })
 export class AlbumsListComponent implements OnInit {
-  @Input() albums: any;
+  @Input() albums: CommonList<AlbumsFeed>;
 
   constructor() { }
 
