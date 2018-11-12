@@ -1,18 +1,34 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { CommonList } from '@core/models/utils';
-import { AlbumsFeed } from '@core/models/albums.models';
+import { AlbumsFeed, AlbumEntry } from '@core/models/albums.models';
 
 @Component({
   selector: 'app-albums-list',
   templateUrl: './albums-list.component.html',
   styleUrls: ['./albums-list.component.scss']
 })
-export class AlbumsListComponent implements OnInit {
+export class AlbumsListComponent implements OnInit, OnChanges {
   @Input() albums: CommonList<AlbumsFeed>;
+
+  albumEntries: AlbumEntry[];
+  selectedAlbum: AlbumEntry = null;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (
+      !change.albums.firstChange &&
+      !change.albums.currentValue.isFetching
+    ) {
+      this.albumEntries = this.albums.data.feed.entry;
+    }
+  }
+
+  onAlbumSelect(album: AlbumEntry): void {
+    this.selectedAlbum = album;
   }
 
 }

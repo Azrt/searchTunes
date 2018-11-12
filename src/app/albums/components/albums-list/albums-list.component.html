@@ -3,11 +3,23 @@
     <mat-card-title>Top 100 albums</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <ng-container *ngIf="!albums.isFetching">
-      <pre>
-        {{ albums | json }}
-      </pre>
-    </ng-container>
+    <div
+      *ngIf="!albums.isFetching"
+      class="albums-list__container">
+      <mat-card class="albums-list__list">
+        <mat-action-list>
+          <app-albums-list-item
+            *ngFor="let album of albumEntries; let i = index"
+            [album]="album"
+            (albumSelect)="onAlbumSelect($event)"
+          ></app-albums-list-item>
+        </mat-action-list>
+      </mat-card>
+      <app-album-details
+        *ngIf="selectedAlbum"
+        [album]="selectedAlbum"
+      ></app-album-details>
+    </div>
 
     <div
       *ngIf="albums.isFetching"

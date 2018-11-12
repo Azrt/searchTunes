@@ -1,0 +1,18 @@
+<button
+  mat-list-item
+  class="albums-list-item__button"
+  (click)="onListItemClick()">
+  <img matListAvatar [src]="album['im:image'][0].label">
+  <h2
+    class="albums-list-item__heading"
+    mat-line>
+    {{ album['im:artist'].label }}
+  </h2>
+  <p class="albums-list-item__subheading"
+    mat-line>
+    <strong>
+      {{ album['im:name'].label }}
+    </strong>
+  </p>
+</button>
+<mat-divider></mat-divider>
