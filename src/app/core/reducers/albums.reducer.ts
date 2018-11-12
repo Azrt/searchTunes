@@ -4,11 +4,11 @@ import { CommonList } from '@core/models/utils';
 import { AlbumsAction } from 'src/app/core/actions/albums.actions';
 
 export interface State {
-  albums: CommonList<any>;
+  list: CommonList<any>;
 }
 
 const initialState: State = {
-  albums: initialListReducer,
+  list: initialListReducer,
 };
 
 export function reducer(
@@ -19,8 +19,8 @@ export function reducer(
     case AlbumsActions.AlbumsAction.GetAlbumsRequest:
       return {
         ...state,
-        albums: {
-          ...state.albums,
+        list: {
+          ...state.list,
           isFetching: true,
           errors: {},
         },
@@ -29,8 +29,8 @@ export function reducer(
     case AlbumsActions.AlbumsAction.GetAlbumsSuccess:
       return {
         ...state,
-        albums: {
-          ...state.albums,
+        list: {
+          ...state.list,
           isFetching: false,
           data: action.payload,
         },
@@ -39,8 +39,8 @@ export function reducer(
     case AlbumsActions.AlbumsAction.GetAlbumsError:
       return {
         ...state,
-        albums: {
-          ...state.albums,
+        list: {
+          ...state.list,
           isFetching: false,
           errors: action.payload,
         },
@@ -51,4 +51,4 @@ export function reducer(
   }
 }
 
-export const getAlbumsList = (state: State) => state.albums;
+export const getAlbumsList = (state: State) => state.list;

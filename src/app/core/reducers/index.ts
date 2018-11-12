@@ -16,7 +16,7 @@ export const reducers: ActionReducerMap<State> = {
 
 export const selectCoreState = createFeatureSelector<State>('core');
 
-export const selectAlbumsState = createSelector(
+export const selectAlbumsListState = createSelector(
   selectCoreState,
-  (state: State) => state.albums,
+  (state: State) => state.albums.list,
 )

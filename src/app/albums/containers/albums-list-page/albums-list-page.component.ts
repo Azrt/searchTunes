@@ -5,11 +5,10 @@ import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-albums-list',
-  templateUrl: './albums-list.component.html',
-  styleUrls: ['./albums-list.component.scss']
+  templateUrl: './albums-list-page.component.html',
+  styleUrls: ['./albums-list-page.component.scss']
 })
-export class AlbumsListComponent implements OnInit {
+export class AlbumsListPageComponent implements OnInit {
   ngUnsubscribe: Subject<any> = new Subject();
 
   albums$: Observable<any>;
@@ -17,7 +16,7 @@ export class AlbumsListComponent implements OnInit {
   constructor(
     private store: Store<fromRoot.State>,
   ) {
-    this.albums$ = this.store.pipe(select(fromRoot.selectAlbumsState));
+    this.albums$ = this.store.pipe(select(fromRoot.selectAlbumsListState));
   }
 
   ngOnInit(): void {
