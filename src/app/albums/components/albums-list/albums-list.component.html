@@ -1,30 +1,26 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Top 100 albums</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <div
-      *ngIf="!albums.isFetching"
-      class="albums-list__container">
-      <mat-card class="albums-list__list">
-        <mat-action-list>
-          <app-albums-list-item
-            *ngFor="let album of albumEntries; let i = index"
-            [album]="album"
-            (albumSelect)="onAlbumSelect($event)"
-          ></app-albums-list-item>
-        </mat-action-list>
-      </mat-card>
-      <app-album-details
-        *ngIf="selectedAlbum"
-        [album]="selectedAlbum"
-      ></app-album-details>
-    </div>
+<h3 mat-subheader class="albums-list__heading">Top 100 albums</h3>
+<div
+  *ngIf="!albums.isFetching"
+  class="albums-list__container">
+  <mat-card class="albums-list__list-container">
+    <mat-action-list class="albums-list__list">
+      <app-albums-list-item
+        *ngFor="let album of albumEntries; let i = index"
+        [album]="album"
+        [selected]="isItemSelected(album)"
+        (albumSelect)="onAlbumSelect($event)"
+      ></app-albums-list-item>
+    </mat-action-list>
+  </mat-card>
+  <app-album-details
+    *ngIf="selectedAlbum"
+    [album]="selectedAlbum"
+    (hide)="onAlbumDetailsHide()"
+  ></app-album-details>
+</div>
 
-    <div
-      *ngIf="albums.isFetching"
-      class="albums-list__loader-container">
-      <mat-spinner></mat-spinner>
-    </div>
-  </mat-card-content>
-</mat-card>
+<div
+  *ngIf="albums.isFetching"
+  class="albums-list__loader-container">
+  <mat-spinner></mat-spinner>
+</div>

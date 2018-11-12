@@ -8,6 +8,7 @@ import { AlbumEntry } from '@core/models/albums.models';
 })
 export class AlbumsListItemComponent implements OnInit {
   @Input() album: AlbumEntry;
+  @Input() selected: boolean = false;
   @Output() albumSelect: EventEmitter<AlbumEntry> = new EventEmitter();
 
   constructor() { }

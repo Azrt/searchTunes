@@ -31,4 +31,12 @@ export class AlbumsListComponent implements OnInit, OnChanges {
     this.selectedAlbum = album;
   }
 
+  isItemSelected(album: AlbumEntry): boolean {
+    return this.selectedAlbum && this.selectedAlbum.id.label === album.id.label;
+  }
+
+  onAlbumDetailsHide(): void {
+    this.selectedAlbum = null;
+  }
+
 }

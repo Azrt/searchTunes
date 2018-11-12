@@ -8,10 +8,15 @@ import { AlbumEntry } from '@core/models/albums.models';
 })
 export class AlbumDetailsComponent implements OnInit {
   @Input() album: AlbumEntry;
+  @Output() hide: EventEmitter<null> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onHideButtonClick() {
+    this.hide.emit();
   }
 
 }

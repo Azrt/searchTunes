@@ -1,6 +1,9 @@
 <button
   mat-list-item
   class="albums-list-item__button"
+  [ngClass]="{
+    'albums-list-item__button--selected': selected
+  }"
   (click)="onListItemClick()">
   <img matListAvatar [src]="album['im:image'][0].label">
   <h2
