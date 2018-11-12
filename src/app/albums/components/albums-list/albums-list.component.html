@@ -1,24 +1,39 @@
-<h3 mat-subheader class="albums-list__heading">Top 100 albums</h3>
-<div
-  *ngIf="!albums.isFetching"
-  class="albums-list__container">
-  <mat-card class="albums-list__list-container">
-    <mat-action-list class="albums-list__list">
-      <app-albums-list-item
-        *ngFor="let album of albumEntries; let i = index"
-        [album]="album"
-        [selected]="isItemSelected(album)"
-        (albumSelect)="onAlbumSelect($event)"
-      ></app-albums-list-item>
-    </mat-action-list>
-  </mat-card>
-  <app-album-details
-    *ngIf="selectedAlbum"
-    [@slideToggle]="selectedAlbum"
-    [album]="selectedAlbum"
-    (hide)="onAlbumDetailsHide()"
-  ></app-album-details>
-</div>
+<ng-container *ngIf="!albums.isFetching">
+  <header class="albums-list__header" mat-subheader>
+    <h3 class="albums-list__heading">Top 100 albums</h3>
+    <form [formGroup]="searchForm">
+      <mat-form-field>
+        <input
+          matInput
+          formControlName="title"
+          type="text"
+          placeholder="Filter results">
+      </mat-form-field>
+    </form>
+  </header>
+  <div class="albums-list__container">
+    <mat-card
+      class="albums-list__list-container"
+      [ngClass]="{
+        'albums-list__list-container--selected': selectedAlbum
+      }">
+      <mat-action-list class="albums-list__list">
+        <app-albums-list-item
+          *ngFor="let album of albumEntries; let i = index"
+          [album]="album"
+          [selected]="isItemSelected(album)"
+          (albumSelect)="onAlbumSelect($event)"
+        ></app-albums-list-item>
+      </mat-action-list>
+    </mat-card>
+    <app-album-details
+      *ngIf="selectedAlbum"
+      [@slideToggle]="selectedAlbum"
+      [album]="selectedAlbum"
+      (hide)="onAlbumDetailsHide()"
+    ></app-album-details>
+  </div>
+</ng-container>
 
 <div
   *ngIf="albums.isFetching"

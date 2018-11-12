@@ -1,8 +1,9 @@
-import { Component, OnInit, OnChanges, Input, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlbumEntry, AlbumsFeed } from '@core/models/albums.models';
 import { CommonList } from '@core/models/utils';
-import { AlbumsFeed, AlbumEntry } from '@core/models/albums.models';
-
 import { slideToggleAnimaion } from '@shared/animations/list.animations';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-albums-list',
@@ -14,12 +15,24 @@ import { slideToggleAnimaion } from '@shared/animations/list.animations';
 export class AlbumsListComponent implements OnInit, OnChanges {
   @Input() albums: CommonList<AlbumsFeed>;
 
-  albumEntries: AlbumEntry[];
+  albumEntries: Array<AlbumEntry>;
   selectedAlbum: AlbumEntry = null;
+  searchForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+  ) { }
 
   ngOnInit() {
+    this.searchForm = this.formBuilder.group({
+      title: '',
+    });
+
+    this.searchForm
+      .valueChanges
+      .subscribe(change => {
+        this.albumEntries = this.albums.data.feed.entry.filter(entry => entry.title.label.toLowerCase().includes(change.title.trim().toLowerCase()));
+      });
   }
 
   ngOnChanges(change: SimpleChanges) {
