@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { AlbumEntry } from '@core/models/albums.models';
 
 @Component({
   selector: 'app-albums-list-item',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './albums-list-item.component.html',
   styleUrls: ['./albums-list-item.component.scss']
 })

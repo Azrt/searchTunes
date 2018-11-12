@@ -14,6 +14,7 @@
   </mat-card>
   <app-album-details
     *ngIf="selectedAlbum"
+    [@slideToggle]="selectedAlbum"
     [album]="selectedAlbum"
     (hide)="onAlbumDetailsHide()"
   ></app-album-details>
