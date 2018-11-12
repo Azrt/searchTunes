@@ -1,6 +1,4 @@
-import {
-  animation, trigger, style, transition, animate, state,
- } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 
  const SLIDE_IN_STYLE = {
    transform: 'translateX(0)',
