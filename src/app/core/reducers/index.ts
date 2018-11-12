@@ -1,7 +1,8 @@
-
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
+import { ActionReducerMap, createSelector, createFeatureSelector } from '@ngrx/store';
+
 import * as fromAlbums from './albums.reducer';
+
 
 export interface State {
   albums: fromAlbums.State;
@@ -12,3 +13,10 @@ export const reducers: ActionReducerMap<State> = {
   albums: fromAlbums.reducer,
   router: fromRouter.routerReducer,
 };
+
+export const selectCoreState = createFeatureSelector<State>('core');
+
+export const selectAlbumsState = createSelector(
+  selectCoreState,
+  (state: State) => state.albums,
+)

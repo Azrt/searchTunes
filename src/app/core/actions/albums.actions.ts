@@ -9,7 +9,7 @@ export enum AlbumsAction {
 export class GetAlbumsRequest implements Action {
   readonly type = AlbumsAction.GetAlbumsRequest;
 
-  constructor(public payload: any) {}
+  constructor(public payload?: number) {}
 }
 
 export class GetAlbumsSuccess implements Action {
