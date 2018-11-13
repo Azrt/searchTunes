@@ -1,3 +1,5 @@
+import { NgtUniversalModule } from '@ng-toolkit/universal';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,8 +20,11 @@ import { MaterialModule } from './shared/material/material.module';
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
+  imports:[
+ CommonModule,
+NgtUniversalModule,
+ 
+    
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
@@ -36,6 +41,5 @@ import { MaterialModule } from './shared/material/material.module';
     MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

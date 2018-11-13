@@ -1,0 +1,17 @@
+{
+  "serverless": {
+    "provider": "aws",
+    "project": "searchTunes",
+    "skipInstall": true,
+    "directory": ".",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  },
+  "universal": {
+    "project": "searchTunes",
+    "skipInstall": false,
+    "directory": "."
+  }
+}

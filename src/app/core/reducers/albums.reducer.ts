@@ -1,7 +1,7 @@
 import { AlbumsActions } from '@core/actions';
 import { initialListReducer } from './common';
 import { CommonList } from '@core/models/utils';
-import { AlbumsAction } from 'src/app/core/actions/albums.actions';
+import { AlbumsAction } from '@core/actions/albums.actions';
 
 export interface State {
   list: CommonList<any>;
