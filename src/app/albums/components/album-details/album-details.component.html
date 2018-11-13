@@ -1,13 +1,23 @@
 <mat-card class="album-details">
   <div>
-    <mat-card-header>
-      <mat-card-title>
-        {{ album['im:name'].label }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ album['im:artist'].label }}
-      </mat-card-subtitle>
-    </mat-card-header>
+    <div class="album-details__header">
+      <mat-card-title-group>
+        <mat-card-title>
+          {{ album['im:name'].label }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ album['im:artist'].label }}
+        </mat-card-subtitle>
+      </mat-card-title-group>
+      <div fxFlex></div>
+      <div class="album-details__button-container">
+        <button
+          mat-button
+          (click)="onHideButtonClick()">
+          Hide
+        </button>
+      </div>
+    </div>
     <img
       mat-card-image
       [src]="album['im:image'][2].label">
@@ -26,11 +36,6 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        mat-button
-        (click)="onHideButtonClick()">
-        Hide
-      </button>
       <a
         mat-button
         mat-raised-button
