@@ -14,6 +14,7 @@ export class AlbumsListPageComponent implements OnInit {
   ngUnsubscribe: Subject<any> = new Subject();
 
   albums$: Observable<CommonList<AlbumsFeed>>;
+  LIMIT: number = 100;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -25,4 +26,8 @@ export class AlbumsListPageComponent implements OnInit {
     this.store.dispatch(new AlbumsActions.GetAlbumsRequest());
   }
 
+  onLimitChange(number: number): void {
+    this.LIMIT = number;
+    this.store.dispatch(new AlbumsActions.GetAlbumsRequest(number));
+  }
 }

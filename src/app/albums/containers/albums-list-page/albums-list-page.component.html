@@ -1,6 +1,8 @@
 <ng-container *ngIf="albums$ | async as albums">
   <app-albums-list
     [albums]="albums"
+    [limit]="LIMIT"
+    (limitChange)="onLimitChange($event)"
   ></app-albums-list>
 </ng-container>
 

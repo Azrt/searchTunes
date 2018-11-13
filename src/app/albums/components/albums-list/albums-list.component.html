@@ -1,7 +1,18 @@
 <ng-container *ngIf="!albums.isFetching">
   <header class="albums-list__header" mat-subheader>
-    <h3 class="albums-list__heading">Top 100 albums</h3>
-    <form [formGroup]="searchForm">
+    <h3 class="albums-list__heading">Top {{ limit }} albums</h3>
+    <form [formGroup]="searchForm" class="albums-list__form">
+      <mat-form-field>
+        <mat-select
+          formControlName="limit"
+          placeholder="Albums limit">
+          <mat-option
+            *ngFor="let number of albumLimitOptions"
+            [value]="number">
+            {{ number }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <mat-form-field>
         <input
           matInput

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlbumEntry, AlbumsFeed } from '@core/models/albums.models';
 import { CommonList } from '@core/models/utils';
@@ -14,10 +14,14 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class AlbumsListComponent implements OnInit, OnChanges {
   @Input() albums: CommonList<AlbumsFeed>;
+  @Input() limit: number;
+  @Output() limitChange: EventEmitter<number> = new EventEmitter();
 
   albumEntries: Array<AlbumEntry>;
   selectedAlbum: AlbumEntry = null;
   searchForm: FormGroup;
+
+  albumLimitOptions: Array<number> = [10, 50, 100, 200];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,12 +30,23 @@ export class AlbumsListComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
       title: '',
+      limit: this.limit,
     });
 
     this.searchForm
+      .get('title')
       .valueChanges
       .subscribe(change => {
-        this.albumEntries = this.albums.data.feed.entry.filter(entry => entry.title.label.toLowerCase().includes(change.title.trim().toLowerCase()));
+        this.albumEntries = this.albums.data.feed.entry
+          .filter(entry => entry.title.label.toLowerCase().includes(change.trim().toLowerCase()));
+      });
+
+    this.searchForm
+      .get('limit')
+      .valueChanges
+      .subscribe(change => {
+        this.searchForm.get('title').patchValue('');
+        this.limitChange.emit(change);
       });
   }
 
